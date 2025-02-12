@@ -6,4 +6,5 @@ setup(name='DistributionPyPackage',
       version = '0.1',
       description = "contains gaussian distribution model",
       packages = ['DistributionPyPackage'],
-      zip_safe=False)
+      author = 'Nathan Shaw',
+      zip_safe=False)#prevents package from being run in a zip file

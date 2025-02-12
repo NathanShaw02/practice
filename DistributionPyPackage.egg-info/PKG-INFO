@@ -1,5 +1,5 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.1
 Name: DistributionPyPackage
 Version: 0.1
 Summary: contains gaussian distribution model
-Dynamic: summary
+Author: Nathan Shaw
