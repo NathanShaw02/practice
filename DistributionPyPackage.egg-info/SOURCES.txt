@@ -1,0 +1,9 @@
+setup.py
+DistributionPyPackage/__init__.py
+DistributionPyPackage/gaussian.py
+DistributionPyPackage/generalDistribution.py
+DistributionPyPackage.egg-info/PKG-INFO
+DistributionPyPackage.egg-info/SOURCES.txt
+DistributionPyPackage.egg-info/dependency_links.txt
+DistributionPyPackage.egg-info/not-zip-safe
+DistributionPyPackage.egg-info/top_level.txt
