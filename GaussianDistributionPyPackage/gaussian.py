@@ -202,6 +202,56 @@ class Gaussian():
 
         return x, y
     
+    def __add__(self, other):
+        
+        """Magic method to add together two Gaussian distributions
+        
+        Args:
+            other (Gaussian): Gaussian instance
+            
+        Returns:
+            Gaussian: Gaussian distribution
+            
+        """
+        
+        # TODO: Calculate the results of summing two Gaussian distributions
+        #   When summing two Gaussian distributions, the mean value is the sum
+        #       of the means of each Gaussian.
+        #
+        #   When summing two Gaussian distributions, the standard deviation is the
+        #       square root of the sum of square ie sqrt(stdev_one ^ 2 + stdev_two ^ 2)
+        
+        # create a new Gaussian object
+        result = Gaussian()
+        
+        # TODO: calculate the mean and standard deviation of the sum of two Gaussians
+        result.mean = self.mean + other.mean # change this line to calculate the mean of the sum of two Gaussian distributions
+        result.stdev = math.sqrt((self.stdev**2)+(other.stdev**2)) # change this line to calculate the standard deviation of the sum of two Gaussian distributions
+        
+        return result
+
+    def __repr__(self):
+    
+        """Magic method to output the characteristics of the Gaussian instance
+        
+        Args:
+            None
+        
+        Returns:
+            string: characteristics of the Gaussian
+        
+        """
+        
+        # TODO: Return a string in the following format - 
+        # "mean mean_value, standard deviation standard_deviation_value"
+        # where mean_value is the mean of the Gaussian distribution
+        # and standard_deviation_value is the standard deviation of
+        # the Gaussian.
+        # For example "mean 3.5, standard deviation 1.3"
+        
+        return "mean "+str(self.mean)+", standard deviation "+str(self.stdev)
+
+# Unit tests to check your solution
 
 import unittest
 
@@ -227,13 +277,22 @@ class TestGaussianClass(unittest.TestCase):
         self.assertEqual(round(self.gaussian.stdev, 2), 92.87, 'sample standard deviation incorrect')
         self.gaussian.read_data_file('numbers.txt', False)
         self.assertEqual(round(self.gaussian.stdev, 2), 88.55, 'population standard deviation incorrect')
-                
+
+    def test_add(self):
+        gaussian_one = Gaussian(25, 3)
+        gaussian_two = Gaussian(30, 4)
+        gaussian_sum = gaussian_one + gaussian_two
+        
+        self.assertEqual(gaussian_sum.mean, 55)
+        self.assertEqual(gaussian_sum.stdev, 5)
+
+    def test_repr(self):
+        gaussian_one = Gaussian(25, 3)
+        
+        self.assertEqual(str(gaussian_one), "mean 25, standard deviation 3")
+        
 tests = TestGaussianClass()
 
 tests_loaded = unittest.TestLoader().loadTestsFromModule(tests)
 
 unittest.TextTestRunner().run(tests_loaded)
-
-# myGaussian = Gaussian()
-# myGaussian.read_data_file('numbers.txt')
-# myGaussian.plot_histogram()
