@@ -1,7 +1,24 @@
 import math
 import matplotlib.pyplot as plt
 
-class Gaussian():
+
+class Distribution():
+    def __init__(self, mu = 0, sigma = 1):
+        self.mean = mu
+        self.stdev = sigma
+        self.data = []
+
+    def read_data_file(self, file_name):
+        with open(file_name) as file:
+            data_list = []
+            line = file.readline()
+            while line:
+                data_list.append(int(line))
+                line = file.readline()
+        file.close()
+        self.data = data_list
+
+class Gaussian(Distribution):
     """ Gaussian distribution class for calculating and 
     visualizing a Gaussian distribution.
     
@@ -13,10 +30,19 @@ class Gaussian():
     """
     def __init__(self, mu = 0, sigma = 1):
         
-        self.mean = mu
-        self.stdev = sigma
-        self.data = []
+        Distribution.__init__(self,mu,sigma)
 
+    def read_data_file(self, file_name, sample = True):
+        with open(file_name) as file:
+            data_list = []
+            line = file.readline()
+            while line:
+                data_list.append(int(line))
+                line = file.readline()
+        file.close()
+        self.data = data_list
+        self.mean = self.calculate_mean()
+        self.stdev = self.calculate_stdev(sample)
 
     
     def calculate_mean(self):
@@ -82,39 +108,6 @@ class Gaussian():
 
         return self.stdev
 
-
-    def read_data_file(self, file_name, sample=True):
-    
-        """Method to read in data from a txt file. The txt file should have
-        one number (float) per line. The numbers are stored in the data attribute. 
-        After reading in the file, the mean and standard deviation are calculated
-                
-        Args:
-            file_name (string): name of a file to read from
-        
-        Returns:
-            None
-        
-        """
-        
-        # This code opens a data file and appends the data to a list called data_list
-        with open(file_name) as file:
-            data_list = []
-            line = file.readline()
-            while line:
-                data_list.append(int(line))
-                line = file.readline()
-        file.close()
-    
-        # TODO: 
-        #   Update the self.data attribute with the data_list
-        #   Update self.mean with the mean of the data_list. 
-        #       You can use the calculate_mean() method with self.calculate_mean()
-        #   Update self.stdev with the standard deviation of the data_list. Use the 
-        #       calcaulte_stdev() method.
-        self.data = data_list
-        self.mean = self.calculate_mean()
-        self.stdev = self.calculate_stdev(sample)
         
     def plot_histogram(self):
         """Method to output a histogram of the instance variable data using 
@@ -214,19 +207,10 @@ class Gaussian():
             
         """
         
-        # TODO: Calculate the results of summing two Gaussian distributions
-        #   When summing two Gaussian distributions, the mean value is the sum
-        #       of the means of each Gaussian.
-        #
-        #   When summing two Gaussian distributions, the standard deviation is the
-        #       square root of the sum of square ie sqrt(stdev_one ^ 2 + stdev_two ^ 2)
-        
-        # create a new Gaussian object
         result = Gaussian()
         
-        # TODO: calculate the mean and standard deviation of the sum of two Gaussians
-        result.mean = self.mean + other.mean # change this line to calculate the mean of the sum of two Gaussian distributions
-        result.stdev = math.sqrt((self.stdev**2)+(other.stdev**2)) # change this line to calculate the standard deviation of the sum of two Gaussian distributions
+        result.mean = self.mean + other.mean #finding the mean for the sum of 2 Gaussian distributions is completed from adding them together
+        result.stdev = math.sqrt((self.stdev**2)+(other.stdev**2)) #finding the std deviation for the sum of 2 Gaussian distributions is completed from squaring them and adding them to find the new variance then rooting them for the std deviation
         
         return result
 
@@ -241,13 +225,6 @@ class Gaussian():
             string: characteristics of the Gaussian
         
         """
-        
-        # TODO: Return a string in the following format - 
-        # "mean mean_value, standard deviation standard_deviation_value"
-        # where mean_value is the mean of the Gaussian distribution
-        # and standard_deviation_value is the standard deviation of
-        # the Gaussian.
-        # For example "mean 3.5, standard deviation 1.3"
         
         return "mean "+str(self.mean)+", standard deviation "+str(self.stdev)
 
