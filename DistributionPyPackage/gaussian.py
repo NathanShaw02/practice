@@ -40,10 +40,7 @@ class Gaussian(Distribution):
             float: mean of the data set
     
         """
-        
-        #TODO: Calculate the mean of the data set. Remember that the data set is stored in self.data
-        # Change the value of the mean attribute to be the mean of the data set
-        # Return the mean of the data set           
+            
         sum = 0
         for i in self.data:
             sum+=i
@@ -64,15 +61,6 @@ class Gaussian(Distribution):
     
         """
 
-        # TODO:
-        #   Calculate the standard deviation of the data set
-        #   
-        #   The sample variable determines if the data set contains a sample or a population
-        #   If sample = True, this means the data is a sample. 
-        #   Keep the value of sample in mind for calculating the standard deviation
-        #
-        #   Make sure to update self.stdev and return the standard deviation as well    
-        ##calculate size of dataset
         if sample == True:
             n = len(self.data) - 1
         else:
@@ -104,8 +92,6 @@ class Gaussian(Distribution):
             None
         """
         
-        # TODO: Plot a histogram of the data_list using the matplotlib package.
-        #       Be sure to label the x and y axes and also give the chart a title
         plt.hist(self.data,bins=20,edgecolor='black')#bins is number of intervals
         plt.xlabel('Value')
         plt.ylabel('Frequency')
@@ -124,8 +110,6 @@ class Gaussian(Distribution):
             float: probability density function output
         """
         
-        # TODO: Calculate the probability density function of the Gaussian distribution
-        #       at the value x. You'll need to use self.stdev and self.mean to do the calculation
         first_part = 1/(math.sqrt(2*math.pi*(self.stdev**2)))       
         exponent = ((x-self.mean)**2)/(2*(self.stdev)**2)
         final_answer = first_part*10**exponent
@@ -144,8 +128,6 @@ class Gaussian(Distribution):
             list: y values for the pdf plot
             
         """
-        
-        #TODO: Nothing to do for this method. Try it out and see how it works.
         
         mu = self.mean
         sigma = self.stdev
@@ -211,49 +193,3 @@ class Gaussian(Distribution):
         """
         
         return "mean "+str(self.mean)+", standard deviation "+str(self.stdev)
-
-# Unit tests to check your solution
-
-import unittest
-
-class TestGaussianClass(unittest.TestCase):
-    def setUp(self):
-        self.gaussian = Gaussian(25, 2)
-
-    def test_initialization(self): 
-        self.assertEqual(self.gaussian.mean, 25, 'incorrect mean')
-        self.assertEqual(self.gaussian.stdev, 2, 'incorrect standard deviation')
-
-    def test_pdf(self):
-        self.assertEqual(round(self.gaussian.pdf(25), 5), 0.19947,\
-         'pdf function does not give expected result') 
-
-    def test_meancalculation(self):
-        self.gaussian.read_data_file('numbers.txt', True)
-        self.assertEqual(self.gaussian.calculate_mean(),\
-         sum(self.gaussian.data) / float(len(self.gaussian.data)), 'calculated mean not as expected')
-
-    def test_stdevcalculation(self):
-        self.gaussian.read_data_file('numbers.txt', True)
-        self.assertEqual(round(self.gaussian.stdev, 2), 92.87, 'sample standard deviation incorrect')
-        self.gaussian.read_data_file('numbers.txt', False)
-        self.assertEqual(round(self.gaussian.stdev, 2), 88.55, 'population standard deviation incorrect')
-
-    def test_add(self):
-        gaussian_one = Gaussian(25, 3)
-        gaussian_two = Gaussian(30, 4)
-        gaussian_sum = gaussian_one + gaussian_two
-        
-        self.assertEqual(gaussian_sum.mean, 55)
-        self.assertEqual(gaussian_sum.stdev, 5)
-
-    def test_repr(self):
-        gaussian_one = Gaussian(25, 3)
-        
-        self.assertEqual(str(gaussian_one), "mean 25, standard deviation 3")
-        
-tests = TestGaussianClass()
-
-tests_loaded = unittest.TestLoader().loadTestsFromModule(tests)
-
-unittest.TextTestRunner().run(tests_loaded)

@@ -1,1 +1,2 @@
 from .gaussian import Gaussian #by including this in the __init__ file, makes the Gaussian class easier to import when using this package
+from .binomial import Binomial #by including this in the __init__ file, makes the Binomial class easier to import when using this package
