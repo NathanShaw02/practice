@@ -1,5 +1,6 @@
 setup.py
 DistributionPyPackage/__init__.py
+DistributionPyPackage/binomial.py
 DistributionPyPackage/gaussian.py
 DistributionPyPackage/generalDistribution.py
 DistributionPyPackage.egg-info/PKG-INFO
