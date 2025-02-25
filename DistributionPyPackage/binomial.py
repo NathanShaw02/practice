@@ -194,8 +194,8 @@ class Binomial(Distribution):
         return "mean "+str(self.mean)+", standard deviation "+str(self.stdev)+", p "+str(self.p)+", n "+str(self.n)
 
 
-# Test input you can uncomment to view functionality
-#
+# #Test input you can uncomment to view functionality
+
 # myBinomial = Binomial()
 # myBinomial.read_data_file("numbers_binomial.txt")
 # myBinomial.replace_stats_with_data()

@@ -1,6 +1,6 @@
 import math
 import matplotlib.pyplot as plt
-from .generalDistribution import Distribution
+from generalDistribution import Distribution
 
 class Gaussian(Distribution):
     """ Gaussian distribution class for calculating and 
@@ -151,7 +151,7 @@ class Gaussian(Distribution):
         fig, axes = plt.subplots(2,sharex=True)
         fig.subplots_adjust(hspace=.5)
         axes[0].hist(self.data, density=True)
-        axes[0].set_title('Normed Histogram of Data')
+        axes[0].set_title('Normal Histogram of Data')
         axes[0].set_ylabel('Density')
 
         axes[1].plot(x, y)
@@ -193,3 +193,11 @@ class Gaussian(Distribution):
         """
         
         return "mean "+str(self.mean)+", standard deviation "+str(self.stdev)
+
+# #test data
+# myGaussian = Gaussian()
+# myGaussian.read_data_file("numbers.txt")
+# myGaussian.calculate_mean()
+# myGaussian.calculate_stdev()
+# myGaussian.plot_histogram()
+# myGaussian.plot_histogram_pdf()
